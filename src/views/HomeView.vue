@@ -1,15 +1,16 @@
 <template>
-  <div class="home pa-6">
-    <h1>Todo page</h1>
+  <div class="home">
+    <TasksList />
   </div>
 </template>
 
 <script>
-  export default {
-    
-  }
+import TasksList from "@/components/Todo/TasksList.vue";
+export default {
+  components: {
+    TasksList,
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
