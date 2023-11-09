@@ -1,4 +1,17 @@
 <template>
+  <!-- !TODO ADD LATER TO A TEXT-FIELD COMPONENT -->
+  <v-text-field
+    v-model="newTaskDescription"
+    @click:appendInner="addTask"
+    @keyup.enter="addTask"
+    hide-details
+    clearable
+    class="pa-6"
+    label="Add task"
+    append-inner-icon="mdi-plus"
+    variant="outlined"
+  ></v-text-field>
+
   <div v-for="task in tasks" :key="task.id">
     <v-list select-strategy="classic">
       <v-list-item @click="toogleTask(task.id)">
@@ -29,6 +42,7 @@
 export default {
   data() {
     return {
+      newTaskDescription: "",
       tasks: [
         {
           createdAt: "2023-11-06T13:49:10.135Z",
@@ -82,6 +96,17 @@ export default {
     };
   },
   methods: {
+    addTask() {
+      // !TODO ADD LATER TO A TEXT-FIELD COMPONENT -->
+      let newTask = {
+        id: Date.now(),
+        description: this.newTaskDescription,
+        completed: false,
+      };
+
+      this.tasks.unshift(newTask);
+      this.newTaskDescription = "";
+    },
     toogleTask(id) {
       console.log("id:", id);
       let task = this.tasks.find((task) => task.id === id);
@@ -90,7 +115,7 @@ export default {
     },
     deleteTask(id) {
       this.tasks = this.tasks.filter((task) => task.id !== id);
-    }
+    },
   },
 };
 </script>
