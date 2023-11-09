@@ -7,6 +7,14 @@
             <v-checkbox-btn :model-value="task.completed"></v-checkbox-btn>
           </v-list-item-action>
         </template>
+        <template v-slot:append>
+          <v-btn
+            @click.stop="deleteTask(task.id)"
+            color="primary"
+            icon="mdi-delete"
+            variant="text"
+          ></v-btn>
+        </template>
         <v-list-item-title
           :class="{ 'text-decoration-line-through': task.completed }"
           >{{ task.description }}</v-list-item-title
@@ -80,6 +88,9 @@ export default {
 
       task.completed = !task.completed;
     },
+    deleteTask(id) {
+      this.tasks = this.tasks.filter((task) => task.id !== id);
+    }
   },
 };
 </script>
