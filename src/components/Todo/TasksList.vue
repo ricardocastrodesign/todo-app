@@ -1,13 +1,16 @@
 <template>
   <div v-for="task in tasks" :key="task.id">
     <v-list select-strategy="classic">
-      <v-list-item>
-        <template v-slot:prepend="{ isActive }">
+      <v-list-item @click="toogleTask(task.id)">
+        <template v-slot:prepend>
           <v-list-item-action start>
-            <v-checkbox-btn :model-value="isActive"></v-checkbox-btn>
+            <v-checkbox-btn :model-value="task.completed"></v-checkbox-btn>
           </v-list-item-action>
         </template>
-        <v-list-item-title>{{ task.description }}</v-list-item-title>
+        <v-list-item-title
+          :class="{ 'text-decoration-line-through': task.completed }"
+          >{{ task.description }}</v-list-item-title
+        >
       </v-list-item>
     </v-list>
     <v-divider></v-divider>
@@ -69,6 +72,14 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    toogleTask(id) {
+      console.log("id:", id);
+      let task = this.tasks.find((task) => task.id === id);
+
+      task.completed = !task.completed;
+    },
   },
 };
 </script>
