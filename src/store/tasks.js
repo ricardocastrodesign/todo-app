@@ -33,10 +33,20 @@ export const useTasks = defineStore('tasks', {
         console.error('Error creating task:', error);
       }
     },
-    toggleTask(id) {
-      const task = this.tasks.find((task) => task.id === id);
-      if (task) {
+    async toggleTask(id) {
+      try {
+        const task = this.tasks.find((task) => task.id === id);
+
+        if (!task) {
+          console.error('Task not found.');
+          return;
+        }
+
         task.completed = !task.completed;
+
+        await api.updateTask(id, { completed: task.completed });
+      } catch (error) {
+        console.error('Error toggling task:', error);
       }
     },
     editTask(payload) {
