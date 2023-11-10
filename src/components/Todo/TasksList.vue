@@ -1,17 +1,4 @@
 <template>
-  <!-- !TODO ADD LATER TO A TEXT-FIELD COMPONENT -->
-  <v-text-field
-    v-model="newTaskDescription"
-    @click:appendInner="addTask"
-    @keyup.enter="addTask"
-    hide-details
-    clearable
-    class="pa-6"
-    label="Add task"
-    append-inner-icon="mdi-plus"
-    variant="outlined"
-  ></v-text-field>
-
   <div v-for="task in filteredTasks" :key="task.id">
     <v-list select-strategy="classic">
       <v-list-item @click="toggleTask(task.id)">
@@ -39,20 +26,10 @@
 </template>
 
 <script>
-import { useTasks } from "@/store/tasks"; // Update the path based on your project structure
+import { useTasks } from "@/store/tasks";
 
 export default {
-  data() {
-    return {
-      newTaskDescription: "",
-    };
-  },
   methods: {
-    addTask() {
-      // !TODO ADD LATER TO A TEXT-FIELD COMPONENT -->
-      useTasks().addTask(this.newTaskDescription);
-      this.newTaskDescription = "";
-    },
     toggleTask(id) {
       useTasks().toggleTask(id);
     },
