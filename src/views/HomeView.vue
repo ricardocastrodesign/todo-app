@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <AddTask />
+  
     <template v-if="tasks.length > 0">
-      <TasksList />
+      <TasksList/>
     </template>
     <template v-else>
       <NoTasks />

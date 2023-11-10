@@ -1,33 +1,35 @@
 <template>
-  <div v-for="task in filteredTasks" :key="task.id">
-    <v-list select-strategy="classic">
-      <v-list-item @click="toggleTask(task.id)">
-        <template v-slot:prepend>
-          <v-list-item-action start>
-            <v-checkbox-btn :model-value="task.completed"></v-checkbox-btn>
-          </v-list-item-action>
-        </template>
-        <template v-slot:append>
-          <v-btn
-            @click.stop="editTask(task)"
-            color="primary"
-            icon="mdi-pencil"
-            variant="text"
-          ></v-btn>
-          <v-btn
-            @click.stop="deleteTask(task)"
-            color="primary"
-            icon="mdi-delete"
-            variant="text"
-          ></v-btn>
-        </template>
-        <v-list-item-title
-          :class="{ 'text-decoration-line-through': task.completed }"
-          >{{ task.description }}</v-list-item-title
-        >
-      </v-list-item>
-    </v-list>
-    <v-divider></v-divider>
+  <div  class="mt-6">
+    <div v-for="task in filteredTasks" :key="task.id">
+      <v-list select-strategy="classic">
+        <v-list-item @click="toggleTask(task.id)">
+          <template v-slot:prepend>
+            <v-list-item-action start>
+              <v-checkbox-btn :model-value="task.completed"></v-checkbox-btn>
+            </v-list-item-action>
+          </template>
+          <template v-slot:append>
+            <v-btn
+              @click.stop="editTask(task)"
+              color="primary"
+              icon="mdi-pencil"
+              variant="text"
+            ></v-btn>
+            <v-btn
+              @click.stop="deleteTask(task)"
+              color="primary"
+              icon="mdi-delete"
+              variant="text"
+            ></v-btn>
+          </template>
+          <v-list-item-title
+            :class="{ 'text-decoration-line-through': task.completed }"
+            >{{ task.description }}</v-list-item-title
+          >
+        </v-list-item>
+      </v-list>
+      <v-divider></v-divider>
+    </div>
   </div>
   <DialogDelete v-if="dialogDelete" :task="selectedTask" :visible="dialogDelete" @close="dialogDelete = false" />
   <DialogEdit v-if="dialogEdit" :task="selectedTask" :visible="dialogEdit" @close="dialogEdit = false"/>
