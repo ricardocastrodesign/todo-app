@@ -36,6 +36,9 @@ export const useTasks = defineStore('tasks', {
         task.completed = !task.completed;
       }
     },
+    editTask(payload) {
+      console.log('Edit Task:', payload);
+    },
     deleteTask(id) {
       this.tasks = this.tasks.filter((task) => task.id !== id);
     },
