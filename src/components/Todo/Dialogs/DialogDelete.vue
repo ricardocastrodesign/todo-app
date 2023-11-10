@@ -1,5 +1,5 @@
 <template>
-  <v-dialog width="500" v-model="dialogOpen">
+  <v-dialog width="500" v-model="dialogOpen" persistent>
     <template v-slot:default>
       <v-card title="Delete task">
         <v-card-text>Are you sure you want to delete this task?</v-card-text>
