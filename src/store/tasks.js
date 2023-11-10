@@ -63,10 +63,10 @@ export const useTasks = defineStore('tasks', {
         console.error('Error updating task:', error);
       }
     },
-    async deleteTask(id) {
+     deleteTask(id) {
       try {
-        await api.deleteTask(id);
         this.tasks = this.tasks.filter((task) => task.id !== id);
+       
       } catch (error) {
         console.error('Error deleting task:', error);
       }

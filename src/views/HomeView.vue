@@ -13,13 +13,12 @@
 <script>
 import { useTasks } from "@/store/tasks";
 
-import AddTask from "@/components/Todo/AddTask.vue";
+
 import TasksList from "@/components/Todo/TasksList.vue";
 import NoTasks from "@/components/Todo/NoTasks.vue";
 export default {
   components: {
     TasksList,
-    AddTask,
     NoTasks
   },
   mounted() {
