@@ -25,12 +25,13 @@ export const useTasks = defineStore('tasks', {
     },
   },
   actions: {
-    addTask(description) {
-      this.tasks.unshift({
-        id: this.nextId++,
-        description,
-        completed: false,
-      });
+    async addTask(description) {
+      try {
+        const response = await api.createTask(description);
+        this.tasks.unshift(response.data);
+      } catch (error) {
+        console.error('Error creating task:', error);
+      }
     },
     toggleTask(id) {
       const task = this.tasks.find((task) => task.id === id);
