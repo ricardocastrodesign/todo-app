@@ -23,6 +23,7 @@ export default {
     NoTasks
   },
   mounted() {
+    useTasks().fetchTasks();
     console.log(this.$store);
 
   },

@@ -65,7 +65,7 @@ export default {
     }
   },
   mounted() {
-    useTasks().fetchTasks();
+    
   },
   computed: {
     filteredTasks() {
