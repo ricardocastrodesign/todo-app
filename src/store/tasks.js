@@ -6,9 +6,11 @@ export const useTasks = defineStore('tasks', {
   state: () => ({
     tasks: [],
     filter: 'all',
-    nextId: 0 //it wont be used when api request are done,
   }),
   getters: {
+    getError() {
+      return this.error;
+    },
     finishedTasks(state) {
       return state.tasks.filter((task) => task.completed);
     },
@@ -52,7 +54,7 @@ export const useTasks = defineStore('tasks', {
     async editTask(payload) {
       try {
         await api.updateTask(payload.id, payload);
-        
+
         const taskIndex = this.tasks.findIndex((task) => task.id === payload.id);
         if (taskIndex !== -1) {
           this.tasks[taskIndex] = { ...this.tasks[taskIndex], ...payload };

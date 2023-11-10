@@ -24,8 +24,6 @@ export default {
   },
   mounted() {
     useTasks().fetchTasks();
-    console.log(this.$store);
-
   },
   computed: {
     tasks() {

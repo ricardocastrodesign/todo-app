@@ -7,7 +7,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn text="No" @click="show=false"></v-btn>
+          <v-btn text="No" @click="show = false"></v-btn>
           <v-btn text="Yes, I'm sure" color="red" @click="deleteTask"></v-btn>
         </v-card-actions>
       </v-card>
@@ -19,21 +19,44 @@
 import { useTasks } from "@/store/tasks";
 
 export default {
-  props: ['task'],
+  props: ["task"],
   data() {
     return {
       dialogOpen: true,
-      taskId: null
+      taskId: null,
     };
   },
   mounted() {
     this.taskId = this.task.id;
   },
   methods: {
-    deleteTask() {
-      useTasks().deleteTask(this.taskId);
-      this.$emit("close");
-    }
+    async deleteTask() {
+      try {
+        await useTasks().deleteTask(this.taskId);
+        this.$root.vtoast.show({
+          icon: "mdi-trash",
+          message: "Task " + this.task.description + " deleted with success!",
+          color: "error",
+        });
+        this.$emit("close");
+      } catch (error) {
+        if (error.response) {
+          const errorMessage = "Error: " + error.response.data.message;
+          this.$root.vtoast.show({
+            icon: "mdi-trash",
+            message: errorMessage,
+            color: "error",
+          });
+        } else {
+          this.$root.vtoast.show({
+            icon: "mdi-trash",
+            message:
+              "Sorry, we couldn't delete the task " + this.task.description,
+            color: "error",
+          });
+        }
+      }
+    },
   },
   computed: {
     show: {
