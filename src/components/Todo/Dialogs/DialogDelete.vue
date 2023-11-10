@@ -16,15 +16,23 @@
 </template>
 
 <script>
+import { useTasks } from "@/store/tasks";
+
 export default {
+  props: ['task'],
   data() {
     return {
       dialogOpen: true,
+      taskId: null
     };
+  },
+  mounted() {
+    this.taskId = this.task.id;
   },
   methods: {
     deleteTask() {
-      this.$emit("delete");
+      useTasks().deleteTask(this.taskId);
+      this.$emit("close");
     }
   },
   computed: {

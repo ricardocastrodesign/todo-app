@@ -15,7 +15,7 @@
             variant="text"
           ></v-btn>
           <v-btn
-            @click.stop="deleteTask(task.id)"
+            @click.stop="deleteTask(task)"
             color="primary"
             icon="mdi-delete"
             variant="text"
@@ -29,8 +29,8 @@
     </v-list>
     <v-divider></v-divider>
   </div>
-  <DialogDelete v-if="dialogDelete" :visible="dialogDelete" @close="dialogDelete = false" @delete="confirmedDeleteTask" />
-  <DialogEdit v-if="dialogEdit" :task="selectedTask" :visible="dialogEdit" @close="dialogEdit = false" @edit="confirmedEditTask" />
+  <DialogDelete v-if="dialogDelete" :task="selectedTask" :visible="dialogDelete" @close="dialogDelete = false" />
+  <DialogEdit v-if="dialogEdit" :task="selectedTask" :visible="dialogEdit" @close="dialogEdit = false"/>
 </template>
 
 <script>
@@ -48,7 +48,6 @@ export default {
     return {
       dialogEdit: false,
       dialogDelete: false,
-      selectedTaskId: 0,
       selectedTask: null
     }
   },
@@ -56,26 +55,13 @@ export default {
     toggleTask(id) {
       useTasks().toggleTask(id);
     },
-    deleteTask(id) {
-      this.selectedTaskId = id;
+    deleteTask(task) {
+      this.selectedTask = task;
       this.dialogDelete = true;
     },
     editTask(task) {
       this.selectedTask = task;
       this.dialogEdit = true;
-    },
-    
-    confirmedEditTask(){
-      console.log('apagou');
-      useTasks().deleteTask(this.selectedTaskId);
-      this.dialogDelete = false;
-
-    },
-    confirmedDeleteTask(){
-      console.log('apagou');
-      useTasks().deleteTask(this.selectedTaskId);
-      this.dialogDelete = false;
-
     }
   },
   mounted() {
