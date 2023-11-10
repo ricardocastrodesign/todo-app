@@ -23,19 +23,39 @@
     </v-list>
     <v-divider></v-divider>
   </div>
+  <DialogDelete v-if="dialogDelete" :visible="dialogDelete" @close="dialogDelete = false" @delete="confirmedDeleteTask" />
 </template>
 
 <script>
 import { useTasks } from "@/store/tasks";
 
+import DialogDelete from "@/components/Todo/Dialogs/DialogDelete.vue"
+
 export default {
+  components: {
+    DialogDelete
+  },
+  data() {
+    return {
+      dialogDelete: false,
+      selectedTaskId: 0
+    }
+  },
   methods: {
     toggleTask(id) {
       useTasks().toggleTask(id);
     },
     deleteTask(id) {
-      useTasks().deleteTask(id);
+      this.selectedTaskId = id;
+      this.dialogDelete = true;
     },
+    
+    confirmedDeleteTask(){
+      console.log('apagou');
+      useTasks().deleteTask(this.selectedTaskId);
+      this.dialogDelete = false;
+
+    }
   },
   mounted() {
     useTasks().fetchTasks();
