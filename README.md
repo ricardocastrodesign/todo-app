@@ -1,4 +1,7 @@
-# essentials
+# Todo App by Ricardo Castro
+
+## Netlify Link
+https://magenta-horse-c9042b.netlify.app
 
 ## Project setup
 
