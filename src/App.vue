@@ -1,7 +1,17 @@
 <template>
   <router-view />
+  <SnackbarComponent ref="vtoast" />
 </template>
 
-<script setup>
-  //
+<script>
+import SnackbarComponent from "./components/Global/SnackbarComponent.vue";
+
+export default {
+  components: {
+    SnackbarComponent,
+  },
+  mounted() {
+    this.$root.vtoast = this.$refs.vtoast;
+  },
+};
 </script>

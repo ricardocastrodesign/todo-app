@@ -24,7 +24,9 @@ export default {
   methods: {
     addTask() {
       useTasks().addTask(this.newTaskDescription);
+      this.$root.vtoast.show({message: 'Task ' + this.newTaskDescription + ' added with success!'});
       this.newTaskDescription = "";
+
     },
   },
 };
