@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 
+import * as api from '@/api';
+
 export const useTasks = defineStore('tasks', {
   state: () => ({
     tasks: [],
@@ -42,8 +44,13 @@ export const useTasks = defineStore('tasks', {
     deleteTask(id) {
       this.tasks = this.tasks.filter((task) => task.id !== id);
     },
-    fetchTasks() {
-      //get from api
+    async fetchTasks() {
+      try {
+        const response = await api.getTasks();
+        this.tasks = response.data;
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
+      }
     },
   },
 });
